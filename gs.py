@@ -1,10 +1,8 @@
 # from pygooglenews import GoogleNews
-
 # gn = GoogleNews()
-
 # search= gn.search('goldman sachs')
-
 # print(search)
+
 from requests_html import HTMLSession
 import pandas as pd
 
@@ -37,7 +35,7 @@ for i in range(1,n) :
     results = nlp(v)
     # print(v)
     # print(results)
-    if results[0]['label'] == 'neutral' :
+    if results[0]['label'] == 'neutral':
         lst2.append(0)
     elif results[0]['label'] == 'positive':
         lst2.append(1)
@@ -52,22 +50,23 @@ url='https://drive.google.com/uc?id=' + url.split('/')[-2]
 #df = pd.read_csv(url)
 df2= pd.read_csv(url)
 #print(df2)
+l = min(len(df),len(df2))
 
-df3 = df2.tail(len(df))
+df3 = df2.tail(l)
 df3=df3.iloc[::-1]
 print(df3)
 print(len(df))
 
 ind = []
-for i in range(len(df)) :
+for i in range(l) :
     ind.append(i)
-df3.reset_index(inplace = True)
+df3.reset_index(inplace = True, drop = True)
 print(df3)
 
 final = pd.concat([df3,df], axis = 1)
 print(final)
 
-final.to_csv("C:\\Users\\varsh\\OneDrive\\Documents\\GitHub\\hackutd\\output.csv")
+final.to_csv("C:\\Users\\varsh\\OneDrive\\Documents\\GitHub\\hackutd\\outputgs.csv")
 
     
 
